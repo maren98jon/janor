@@ -12,6 +12,8 @@ function getPool() {
   if (!globalForPrisma.pool) {
     globalForPrisma.pool = new Pool({
       connectionString: process.env.DATABASE_URL,
+      // Don't try to connect during build
+      ...(process.env.VERCEL ? { max: 1 } : {}),
     });
   }
   return globalForPrisma.pool;
