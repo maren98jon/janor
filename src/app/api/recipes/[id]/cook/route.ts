@@ -22,7 +22,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
     where: { householdId: HOUSEHOLD_ID },
   });
 
-  allInventory.forEach((item) => {
+  allInventory.forEach((item: { id: string; foodCatalogItemId: string; quantity: number }) => {
     if (!inventoryMap.has(item.foodCatalogItemId)) {
       inventoryMap.set(item.foodCatalogItemId, []);
     }

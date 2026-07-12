@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
   const inventory = await prisma.inventoryItem.findMany({
     where: { householdId: HOUSEHOLD_ID },
   });
-  inventory.forEach((item) => {
+  inventory.forEach((item: { foodCatalogItemId: string; quantity: number }) => {
     const current = inventoryMap.get(item.foodCatalogItemId) || 0;
     inventoryMap.set(item.foodCatalogItemId, current + item.quantity);
   });
